@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: local
+---
+
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:postgresql://localhost:2020/harloader
+    driver-class-name: org.postgresql.Driver
+    username: user
+    password: pw
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    drop-first: true
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: postgresql
+    databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+---
+
+spring:
+  profiles: docker
+  datasource:
+    url: jdbc:postgresql://localhost:2020/harloader
+    driver-class-name: org.postgresql.Driver
+    username: user
+    password: pw
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    drop-first: true
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: postgresql
+    databasePlatform: org.hibernate.dialect.PostgreSQLDialect

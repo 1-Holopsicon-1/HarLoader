@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: "har-archive table init"
+      author: 1-Holopsicon-1
+      changes:
+        - createTable:
+            tableName: har_archive
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: data
+                  type: jsonb
+                  constraints:
+                    nullable: false
+              - column:
+                  name: browser_data
+                  type: varchar(200)
+              - column:
+                  name: archive_ver
+                  type: varchar(120)

@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: "request table init"
+      author: 1-Holopsicon-1
+      changes:
+        - createTable:
+            tableName: request
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: url
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: body
+                  type: text
+              - column:
+                  name: headers
+                  type: jsonb
+              - column:
+                  name: params
+                  type: jsonb
+              - column:
+                  name: method
+                  type: varchar(5)
+              - column:
+                  name: user_id
+                  type: serial
+              - column:
+                  name: har_archive_id
+                  type: serial
+
+        - addForeignKeyConstraint:
+            baseTableName: request
+            baseColumnNames: user_id
+            constraintName: fk_address_user
+            referencedColumnNames: id
+            referencedTableName: user
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: request
+            baseColumnNames: har_archive_id
+            constraintName: fk_from_which_archive
+            referencedColumnNames: id
+            referencedTableName: har_archive
+            onDelete: CASCADE
